@@ -153,6 +153,6 @@ enoughBond(address _address)
 ```
 ## Graphs
 ### <a name="dependencyGraph"></a> `Dependency Graph` {#dependencyGraph}
-![Dependency Graph](images/BeneficiaryGovernance_dependency_graph.png)
+![Dependency Graph](/docs/images/BeneficiaryGovernance_dependency_graph.png)
 ### <a name="inheritanceGraph"></a> `Inheritance Graph` {#inheritanceGraph}
-![Inheritance Graph](images/BeneficiaryGovernance_inheritance_graph.png)
+![Inheritance Graph](/docs/images/BeneficiaryGovernance_inheritance_graph.png)
