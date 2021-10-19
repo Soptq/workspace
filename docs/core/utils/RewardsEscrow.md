@@ -27,16 +27,20 @@ constructor(contract IContractRegistry contractRegistry_) public
 ```
 isClaimable(bytes32 escrowId_) external  returns (bool)
 ```
+
 | Parameter Name | Type | Description |
 |------------|-----| -------|
 | `escrowId_`| bytes32| Bytes32|
+
 ### <a name="getEscrowsByUser_"></a> getEscrowsByUser() {#getEscrowsByUser_}
 ```
 getEscrowsByUser(address account) external  returns (bytes32[])
 ```
+
 | Parameter Name | Type | Description |
 |------------|-----| -------|
 | `account`| address| address|
+
 ### <a name="lock_"></a> lock() {#lock_}
 ```
 lock(address account_, uint256 amount_) external 

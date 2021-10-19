@@ -39,9 +39,11 @@ constructor(contract IContractRegistry _contractRegistry) public
 getVoiceCredits(address _address) public  returns (uint256)
 ```
 todo - check if multiplier is needed for calculating square root of smaller balances
+
 | Parameter Name | Type | Description |
 |------------|-----| -------|
 | `_address`| address| address to get voice credits for|
+
 ### <a name="getWithdrawableBalance_"></a> getWithdrawableBalance() {#getWithdrawableBalance_}
 ```
 getWithdrawableBalance(address _address) public  returns (uint256)
