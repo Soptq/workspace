@@ -38,20 +38,27 @@ getNumberOfProposals(enum BeneficiaryGovernance.ProposalType _type) external  re
 ```
 getNumberOfVoters(uint256 proposalId) external  returns (uint256)
 ```
+
 | Parameter Name | Type | Description |
 |------------|-----| -------|
 | `proposalId`| uint256| id of the proposal|
+
 #### Return Values:
+
 | Return Name | Type | Description |
 |-------------|-------|------------|
 |number| uint256|of votes to a proposal|
+
 ### <a name="getStatus_"></a> getStatus() {#getStatus_}
+
 ```
 getStatus(uint256 proposalId) external  returns (enum BeneficiaryGovernance.ProposalStatus)
 ```
+
 | Parameter Name | Type | Description |
 |------------|-----| -------|
 | `proposalId`| uint256| id of the proposal|
+
 #### Return Values:
 | Return Name | Type | Description |
 |-------------|-------|------------|
