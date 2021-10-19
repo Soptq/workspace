@@ -41,12 +41,12 @@ getNumberOfVoters(uint256 proposalId) external  returns (uint256)
 | Parameter Name | Type | Description |
 |------------|-----| -------|
 | `proposalId`| uint256| id of the proposal|
-&nbsp
+<br/>
 #### Return Values:
 | Return Name | Type | Description |
 |-------------|-------|------------|
 |number| uint256|of votes to a proposal|
-&nbsp
+<br/>
 ### <a name="getStatus_"></a> getStatus() {#getStatus_}
 ```
 getStatus(uint256 proposalId) external  returns (enum BeneficiaryGovernance.ProposalStatus)
@@ -54,12 +54,12 @@ getStatus(uint256 proposalId) external  returns (enum BeneficiaryGovernance.Prop
 | Parameter Name | Type | Description |
 |------------|-----| -------|
 | `proposalId`| uint256| id of the proposal|
-&nbsp
+<br/>
 #### Return Values:
 | Return Name | Type | Description |
 |-------------|-------|------------|
 |status| uint256|of proposal|
-&nbsp
+<br/>
 ### <a name="hasVoted_"></a> hasVoted() {#hasVoted_}
 ```
 hasVoted(uint256 proposalId, address voter) external  returns (bool)
