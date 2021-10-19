@@ -128,6 +128,6 @@ updateReward(address account)
 ```
 ## Graphs
 ### <a name="dependencyGraph"></a> `Dependency Graph` {#dependencyGraph}
-![Dependency Graph](images/Staking_dependency_graph.png)
+![Dependency Graph](/docs/images/Staking_dependency_graph.png)
 ### <a name="inheritanceGraph"></a> `Inheritance Graph` {#inheritanceGraph}
-![Inheritance Graph](images/Staking_inheritance_graph.png)
+![Inheritance Graph](/docs/images/Staking_inheritance_graph.png)

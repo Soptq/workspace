@@ -69,6 +69,6 @@ ClaimedIntoStable(bytes32 batchId, uint8 stableCoinIndex, uint256 threeCurveAmou
 ```
 ## Graphs
 ### <a name="dependencyGraph"></a> `Dependency Graph` {#dependencyGraph}
-![Dependency Graph](images/HysiBatchZapper_dependency_graph.png)
+![Dependency Graph](/docs/images/HysiBatchZapper_dependency_graph.png)
 ### <a name="inheritanceGraph"></a> `Inheritance Graph` {#inheritanceGraph}
-![Inheritance Graph](images/HysiBatchZapper_inheritance_graph.png)
+![Inheritance Graph](/docs/images/HysiBatchZapper_inheritance_graph.png)

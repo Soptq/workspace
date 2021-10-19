@@ -132,6 +132,6 @@ RequiredKeeperStakeChanged(uint256 oldRequirement, uint256 newRequirement)
 ```
 ## Graphs
 ### <a name="dependencyGraph"></a> `Dependency Graph` {#dependencyGraph}
-![Dependency Graph](images/KeeperIncentive_dependency_graph.png)
+![Dependency Graph](/docs/images/KeeperIncentive_dependency_graph.png)
 ### <a name="inheritanceGraph"></a> `Inheritance Graph` {#inheritanceGraph}
-![Inheritance Graph](images/KeeperIncentive_inheritance_graph.png)
+![Inheritance Graph](/docs/images/KeeperIncentive_inheritance_graph.png)

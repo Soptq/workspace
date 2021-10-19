@@ -88,6 +88,6 @@ VestingCliffChanged(uint256 _vestingCliff)
 ```
 ## Graphs
 ### <a name="dependencyGraph"></a> `Dependency Graph` {#dependencyGraph}
-![Dependency Graph](images/RewardsEscrow_dependency_graph.png)
+![Dependency Graph](/docs/images/RewardsEscrow_dependency_graph.png)
 ### <a name="inheritanceGraph"></a> `Inheritance Graph` {#inheritanceGraph}
-![Inheritance Graph](images/RewardsEscrow_inheritance_graph.png)
+![Inheritance Graph](/docs/images/RewardsEscrow_inheritance_graph.png)

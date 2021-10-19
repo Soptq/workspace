@@ -102,6 +102,6 @@ RegionChanged(contract IRegion from, contract IRegion to)
 ```
 ## Graphs
 ### <a name="dependencyGraph"></a> `Dependency Graph` {#dependencyGraph}
-![Dependency Graph](images/RewardsManager_dependency_graph.png)
+![Dependency Graph](/docs/images/RewardsManager_dependency_graph.png)
 ### <a name="inheritanceGraph"></a> `Inheritance Graph` {#inheritanceGraph}
-![Inheritance Graph](images/RewardsManager_inheritance_graph.png)
+![Inheritance Graph](/docs/images/RewardsManager_inheritance_graph.png)

@@ -229,6 +229,6 @@ onlyControllerContract(bytes32 contractName_)
 - `contractName_`: Bytes32
 ## Graphs
 ### <a name="dependencyGraph"></a> `Dependency Graph` {#dependencyGraph}
-![Dependency Graph](images/ParticipationReward_dependency_graph.png)
+![Dependency Graph](/docs/images/ParticipationReward_dependency_graph.png)
 ### <a name="inheritanceGraph"></a> `Inheritance Graph` {#inheritanceGraph}
-![Inheritance Graph](images/ParticipationReward_inheritance_graph.png)
+![Inheritance Graph](/docs/images/ParticipationReward_inheritance_graph.png)
