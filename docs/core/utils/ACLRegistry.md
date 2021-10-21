@@ -46,8 +46,8 @@ accounts that have been granted it.
 ## Modifiers:
 - [`onlyRole()`](#onlyrole)
 ## Graphs:
-- [`Dependency Graph`](#dependency-graph)
-- [`Inheritance Graph`](#inheritance-graph)
+- [Dependency Graph](#dependency-graph)
+- [Inheritance Graph](#inheritance-graph)
 ***
 ## Function Definitions:
 ###  hasRole()

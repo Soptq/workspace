@@ -6,8 +6,8 @@
 - [`deposit()`](#deposit)
 - [`getRandomNumber()`](#getrandomnumber)
 ## Graphs:
-- [`Dependency Graph`](#dependency-graph)
-- [`Inheritance Graph`](#inheritance-graph)
+- [Dependency Graph](#dependency-graph)
+- [Inheritance Graph](#inheritance-graph)
 ***
 ## Function Definitions:
 ###  constructor()

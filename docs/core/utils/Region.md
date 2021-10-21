@@ -8,8 +8,8 @@
 ## Events:
 - [`RegionAdded`](#regionadded)
 ## Graphs:
-- [`Dependency Graph`](#dependency-graph)
-- [`Inheritance Graph`](#inheritance-graph)
+- [Dependency Graph](#dependency-graph)
+- [Inheritance Graph](#inheritance-graph)
 ***
 ## Function Definitions:
 ###  constructor()

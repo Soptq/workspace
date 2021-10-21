@@ -18,8 +18,8 @@ Manages distribution of POP rewards to Popcorn Treasury, DAO Staking, and Benefi
 - [`TokenSwapped`](#tokenswapped)
 - [`RegionChanged`](#regionchanged)
 ## Graphs:
-- [`Dependency Graph`](#dependency-graph)
-- [`Inheritance Graph`](#inheritance-graph)
+- [Dependency Graph](#dependency-graph)
+- [Inheritance Graph](#inheritance-graph)
 ***
 ## Function Definitions:
 ###  constructor()

@@ -15,8 +15,8 @@ This allows us to update addresses in one central point and reduces constructing
 - [`ContractUpdated`](#contractupdated)
 - [`ContractDeleted`](#contractdeleted)
 ## Graphs:
-- [`Dependency Graph`](#dependency-graph)
-- [`Inheritance Graph`](#inheritance-graph)
+- [Dependency Graph](#dependency-graph)
+- [Inheritance Graph](#inheritance-graph)
 ***
 ## Function Definitions:
 ###  constructor()
