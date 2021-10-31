@@ -8,12 +8,10 @@
       * [GrantElections](docs/core/dao/GrantElections.md)
       * [Staking](docs/core/dao/Staking.md)
     * defi
-      * hysi_batch
-        * [HysiBatchInteraction](docs/core/defi/hysi_batch/HysiBatchInteraction.md)
-        * [HysiBatchZapper](docs/core/defi/hysi_batch/HysiBatchZapper.md)
-      * pool
-        * [AffiliateToken](docs/core/defi/pool/AffiliateToken.md)
-        * [Pool](docs/core/defi/pool/Pool.md)
+      * [AffiliateToken](docs/core/defi/AffiliateToken.md)
+      * [HysiBatchInteraction](docs/core/defi/HysiBatchInteraction.md)
+      * [HysiBatchZapper](docs/core/defi/HysiBatchZapper.md)
+      * [Pool](docs/core/defi/Pool.md)
     * utils
       * [ACLRegistry](docs/core/utils/ACLRegistry.md)
       * [ContractRegistry](docs/core/utils/ContractRegistry.md)
