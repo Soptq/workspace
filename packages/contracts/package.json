@@ -32,7 +32,7 @@
     "rimraf": "^3.0.2"
   },
   "dependencies": {
-    "@anthonymartin/solidity-docgen": "0.5.13",
+    "@soptq/solidity-docgen": "0.5.17",
     "@chainlink/contracts": "^0.1.7",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@openzeppelin/contracts": "^3.4.0",

@@ -10,6 +10,7 @@ const path = require("path");
 const spawnSync = require("child_process").spawnSync;
 const { exec } = require('child_process');
 
+const DEFAULT_SOLC_VERSION = "0.7.6";
 const GLOBAL_NODE_DIR = path.resolve(__dirname, "../../../node_modules");
 const NODE_DIR = path.resolve(__dirname, "../node_modules");
 const INPUT_DIR = path.resolve(__dirname, "../contracts");
@@ -36,36 +37,27 @@ function lines(pathName) {
     .split("\n");
 }
 
-function scan(pathName, indentation, defaultSolcVersion) {
+async function scan(pathName, indentation) {
   if (!excludeList.includes(pathName)) {
     if (fs.lstatSync(pathName).isDirectory()) {
-      let nextSolcVersion = defaultSolcVersion;
-      // Scan if there is a specified solc version
-      for (const fileName of fs.readdirSync(pathName)) {
-        if (fs.lstatSync(pathName + "/" + fileName).isFile()
-            && !excludeList.includes(pathName + "/" + fileName)
-            && fileName.endsWith("-version")) {
-          nextSolcVersion = fileName.split("-")[1]
-        }
-      }
 
       fs.appendFileSync(
         SUMMARY_FILE,
         indentation + "* " + path.basename(pathName) + "\n"
       );
 
-      if (!(nextSolcVersion in solcVersionDict)) {
-        solcVersionDict[nextSolcVersion] = {
-          "included-path": [],
-          "excluded-path": excludeList,
+      for (const fileName of fs.readdirSync(pathName))
+        scan(pathName + "/" + fileName, indentation + "  ");
+    } else if (pathName.endsWith(".sol")) {
+      const solcVersion = getDocgenSolcVersion(pathName);
+      if (!(solcVersion in solcVersionDict)) {
+        solcVersionDict[solcVersion] = {
+          "included-pathname": [],
+          "excluded-pathname": excludeList,
         }
       }
+      solcVersionDict[solcVersion]["included-pathname"].push(pathName);
 
-      solcVersionDict[nextSolcVersion]["included-path"].push(pathName)
-
-      for (const fileName of fs.readdirSync(pathName))
-        scan(pathName + "/" + fileName, indentation + "  ", nextSolcVersion);
-    } else if (pathName.endsWith(".sol")) {
       const text = path.basename(pathName).slice(0, -4);
       const link = pathName.slice(INPUT_DIR.length, -4);
       fs.appendFileSync(
@@ -102,60 +94,6 @@ function checkDir(pathName){
   }
 }
 
-checkDir(OUTPUT_IMAGES_DIR);
-
-fs.writeFileSync(SUMMARY_FILE, "# Summary\n");
-fs.writeFileSync(GITBOOK_FILE, "root: ./\n");
-fs.appendFileSync(GITBOOK_FILE, "structure:\n");
-fs.appendFileSync(GITBOOK_FILE, "  readme: README.md\n");
-fs.appendFileSync(GITBOOK_FILE, "  summary: SUMMARY.md\n");
-
-scan(INPUT_DIR, "", "0.7.6");
-
-for (const [thisSolcVersion, thisObj] of Object.entries(solcVersionDict)) {
-  let preExcludeListPathName = [...thisObj["excluded-path"]];
-  let excludeListPathName = [];
-  for (const [thatSolcVersion, thatObj] of Object.entries(solcVersionDict)) {
-    if (thisSolcVersion === thatSolcVersion)
-      continue;
-    preExcludeListPathName.push(...thatObj["included-path"]);
-  }
-  for (const thisExcludedPath of preExcludeListPathName) {
-    let isEglible = true;
-    for (const thatExcludedPath of preExcludeListPathName) {
-      if (thisExcludedPath === thatExcludedPath)
-        continue;
-      if (thatExcludedPath.includes(thisExcludedPath))
-        isEglible = false;
-    }
-    if (isEglible)
-      excludeListPathName.push(thisExcludedPath);
-  }
-
-  const args = [
-    GLOBAL_NODE_DIR + "/@anthonymartin/solidity-docgen/dist/cli.js",
-    "--input=" + INPUT_DIR,
-    "--output=" + OUTPUT_DIR,
-    "--templates=" + CONFIG_DIR,
-    "--exclude=" + excludeListPathName.toString(),
-    "--solc-module=" + GLOBAL_NODE_DIR + "/solc-" + thisSolcVersion,
-    "--solc-settings=" +
-    JSON.stringify({ optimizer: { enabled: true, runs: 200 } }),
-    "--output-structure=" + "contracts",
-    "--helpers=" + TOC_HELPER_FILE,
-  ];
-
-  const result = spawnSync("node", args, {
-    stdio: ["inherit", "inherit", "pipe"],
-  });
-  
-  if (result.stderr.length > 0)
-    throw new Error(result.stderr);
-}
-
-
-fix(OUTPUT_DIR);
-
 function generateGraphs(sourcePathNameList) {
   for (const sourcePathName of sourcePathNameList) {
     const contractName = path.basename(sourcePathName).slice(0, -4);
@@ -180,8 +118,6 @@ function generateGraphs(sourcePathNameList) {
   }
 }
 
-generateGraphs(sourcePathNameList);
-
 function insertLinebreak(docPathNameList) {
   const re = /^\[\[linebreak\]\]/gm;
   for (const docPathName of docPathNameList) {
@@ -190,5 +126,61 @@ function insertLinebreak(docPathNameList) {
     fs.writeFileSync(docPathName, insertedFileContent, "utf8");
   }
 }
+
+function getDocgenSolcVersion(filePath) {
+  for (const line of lines(filePath)) {
+    if (line.startsWith("//") && line.includes("Docgen-SOLC")) {
+      return line.match(/(\d+.\d+.\d+)/)[1];
+    }
+  }
+  return DEFAULT_SOLC_VERSION
+}
+
+checkDir(OUTPUT_IMAGES_DIR);
+
+fs.writeFileSync(SUMMARY_FILE, "# Summary\n");
+fs.writeFileSync(GITBOOK_FILE, "root: ./\n");
+fs.appendFileSync(GITBOOK_FILE, "structure:\n");
+fs.appendFileSync(GITBOOK_FILE, "  readme: README.md\n");
+fs.appendFileSync(GITBOOK_FILE, "  summary: SUMMARY.md\n");
+
+scan(INPUT_DIR, "", DEFAULT_SOLC_VERSION);
+
+for (const [thisSolcVersion, thisObj] of Object.entries(solcVersionDict)) {
+  let excludeListPathName = [...thisObj["excluded-pathname"]];
+  for (const [thatSolcVersion, thatObj] of Object.entries(solcVersionDict)) {
+    if (thisSolcVersion === thatSolcVersion)
+      continue;
+    excludeListPathName.push(...thatObj["included-pathname"]);
+  }
+
+  console.log(excludeListPathName);
+
+  const args = [
+    // GLOBAL_NODE_DIR + "/@anthonymartin/solidity-docgen/dist/cli.js",
+    GLOBAL_NODE_DIR + "/@soptq/solidity-docgen/dist/cli.js",
+    "--input=" + INPUT_DIR,
+    "--output=" + OUTPUT_DIR,
+    "--templates=" + CONFIG_DIR,
+    "--exclude=" + excludeListPathName.toString(),
+    "--solc-module=" + GLOBAL_NODE_DIR + "/solc-" + thisSolcVersion,
+    "--solc-settings=" +
+    JSON.stringify({ optimizer: { enabled: true, runs: 200 } }),
+    "--output-structure=" + "contracts",
+    "--helpers=" + TOC_HELPER_FILE,
+  ];
+
+  const result = spawnSync("node", args, {
+    stdio: ["inherit", "inherit", "pipe"],
+  });
+
+  if (result.stderr.length > 0)
+    throw new Error(result.stderr);
+}
+
+
+fix(OUTPUT_DIR);
+
+// generateGraphs(sourcePathNameList);
 
 insertLinebreak(postCheckPathNameList);
