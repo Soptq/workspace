@@ -1,8 +1,9 @@
 /**
  * By default this script will compile all contracts using solc 0.7.6
- * If you want to specify a solc version for a path, please do the followings:
+ * If you want to specify a solc version for a contract, please do the followings:
  * 1. add the specified version of solc to package.json. For example: "solc-0.7.6": "npm:solc@0.7.6",
- * 2. add a file named `solc-SOLC_VERSION-version` to the desired path. See contracts/core/defi/pool for a example
+ * 2. run npm install / yarn install,
+ * 3. insert `// Docgen-SOLC: x.x.x` to the contract source code. See contracts/core/defi/Pool.sol for a example.
  */
 
 const fs = require("fs");
@@ -144,7 +145,7 @@ fs.appendFileSync(GITBOOK_FILE, "structure:\n");
 fs.appendFileSync(GITBOOK_FILE, "  readme: README.md\n");
 fs.appendFileSync(GITBOOK_FILE, "  summary: SUMMARY.md\n");
 
-scan(INPUT_DIR, "", DEFAULT_SOLC_VERSION);
+scan(INPUT_DIR, "");
 
 for (const [thisSolcVersion, thisObj] of Object.entries(solcVersionDict)) {
   let excludeListPathName = [...thisObj["excluded-pathname"]];
@@ -153,8 +154,6 @@ for (const [thisSolcVersion, thisObj] of Object.entries(solcVersionDict)) {
       continue;
     excludeListPathName.push(...thatObj["included-pathname"]);
   }
-
-  console.log(excludeListPathName);
 
   const args = [
     // GLOBAL_NODE_DIR + "/@anthonymartin/solidity-docgen/dist/cli.js",
@@ -181,6 +180,6 @@ for (const [thisSolcVersion, thisObj] of Object.entries(solcVersionDict)) {
 
 fix(OUTPUT_DIR);
 
-// generateGraphs(sourcePathNameList);
+generateGraphs(sourcePathNameList);
 
 insertLinebreak(postCheckPathNameList);
